@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    text-align: center;
+    margin: 0;
+    padding: 40px;
+}
+
+.container {
+    background: white;
+    max-width: 400px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#status {
+    margin: 15px;
+    font-weight: bold;
+}
+
+li {
+    list-style: none;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
