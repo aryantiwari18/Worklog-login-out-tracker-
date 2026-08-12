@@ -1,46 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background: #0b0b0b;
+    background: #000;
     color: white;
     text-align: center;
     margin: 0;
     padding: 40px 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
+/* Moving background glow */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    z-index: -1;
+    animation: moveGlow 8s infinite alternate ease-in-out;
+}
+
+body::before {
+    background: #0066ff;
+    top: 10%;
+    left: -100px;
+}
+
+body::after {
+    background: #e00000;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes moveGlow {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(180px, 100px);
+    }
+}
+
+/* Main card */
 .container {
-    background: #1f1f1f;
+    background: #111;
     max-width: 450px;
     margin: auto;
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #333;
+    border-radius: 18px;
+    border: 1px solid #333;
+    box-shadow:
+        0 0 15px #0066ff,
+        0 0 40px rgba(0, 102, 255, 0.25);
+
+    animation: cardGlow 3s infinite alternate;
+}
+
+@keyframes cardGlow {
+    from {
+        box-shadow: 0 0 15px #0066ff;
+    }
+
+    to {
+        box-shadow:
+            0 0 25px #0066ff,
+            0 0 50px rgba(0, 102, 255, 0.3);
+    }
 }
 
 h1 {
-    color: #2196f3;
+    color: white;
     margin-bottom: 25px;
+    text-shadow: 0 0 10px #0066ff;
 }
 
 h2 {
-    color: #ccc;
-    margin-top: 25px;
+    color: white;
 }
 
+/* Input */
 input {
     width: 90%;
     padding: 13px;
     margin-bottom: 15px;
-    background: #333;
+    background: #222;
     color: white;
-    border: 1px solid #666;
+    border: 1px solid #555;
     border-radius: 7px;
-    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #0066ff;
+    box-shadow: 0 0 15px #0066ff;
 }
 
 input::placeholder {
     color: #aaa;
 }
 
+/* Buttons */
 button {
     padding: 12px 22px;
     margin: 5px;
@@ -49,32 +119,48 @@ button {
     cursor: pointer;
     color: white;
     font-weight: bold;
+    transition: 0.3s;
 }
 
+/* Login - Green */
 button:first-of-type {
-    background: #2196f3;
+    background: #00a83b;
+    box-shadow: 0 0 12px #00a83b;
 }
 
+/* Logout - Red */
 button:nth-of-type(2) {
-    background: #e53935;
+    background: #e00000;
+    box-shadow: 0 0 12px #e00000;
 }
 
+/* Clear History - Blue */
 button:last-of-type {
-    background: #555;
+    background: #0066ff;
+    box-shadow: 0 0 12px #0066ff;
 }
 
+/* Button animation */
 button:hover {
-    opacity: 0.8;
+    transform: translateY(-4px) scale(1.05);
 }
 
+button:active {
+    transform: scale(0.95);
+}
+
+/* Status */
 #status {
     margin: 20px 0;
     padding: 12px;
-    background: #333;
+    background: #222;
+    color: white;
     border-radius: 7px;
     font-weight: bold;
+    border: 1px solid #444;
 }
 
+/* History */
 #history {
     padding: 0;
 }
@@ -83,9 +169,24 @@ li {
     list-style: none;
     padding: 12px;
     margin: 7px 0;
-    background: #333;
-    border-left: 4px solid #2196f3;
+    background: #222;
+    border-left: 4px solid #0066ff;
     border-radius: 5px;
     text-align: left;
     font-size: 14px;
+    color: white;
+
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
