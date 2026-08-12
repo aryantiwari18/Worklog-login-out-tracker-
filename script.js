@@ -72,3 +72,7 @@ function displayHistory() {
 }
 
 displayHistory();
+function clearHistory() {
+    localStorage.removeItem("loginHistory");
+    displayHistory();
+}
