@@ -1,2 +1,2 @@
 # Worklog-login-out-tracker-
-A simple Login and Logout Tracker using HTML, CSS and JavaScript.
+A simple Login and Logout session Tracker using HTML, CSS and JavaScript.
