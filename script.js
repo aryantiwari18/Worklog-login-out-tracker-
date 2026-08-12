@@ -1,7 +1,7 @@
 let loginTime = null;
 
 function login() {
-    const username = document.getElementById("username").value;
+    const username = document.getElementById("username").value.trim();
 
     if (username === "") {
         alert("Please enter your username.");
@@ -13,11 +13,12 @@ function login() {
     document.getElementById("status").innerText =
         username + " is logged in at " + loginTime.toLocaleTimeString();
 
-    addHistory(username, "Login", loginTime);
+    saveHistory(username, "Login", loginTime);
+    displayHistory();
 }
 
 function logout() {
-    const username = document.getElementById("username").value;
+    const username = document.getElementById("username").value.trim();
 
     if (username === "") {
         alert("Please enter your username.");
@@ -34,18 +35,40 @@ function logout() {
     document.getElementById("status").innerText =
         username + " logged out at " + logoutTime.toLocaleTimeString();
 
-    addHistory(username, "Logout", logoutTime);
+    saveHistory(username, "Logout", logoutTime);
 
     loginTime = null;
+    displayHistory();
 }
 
-function addHistory(username, action, time) {
-    const history = document.getElementById("history");
+function saveHistory(username, action, time) {
+    let history = JSON.parse(localStorage.getItem("loginHistory")) || [];
 
-    const item = document.createElement("li");
+    history.push({
+        username: username,
+        action: action,
+        time: time.toLocaleString()
+    });
 
-    item.innerText =
-        username + " - " + action + " - " + time.toLocaleString();
-
-    history.appendChild(item);
+    localStorage.setItem("loginHistory", JSON.stringify(history));
 }
+
+function displayHistory() {
+    const historyList = document.getElementById("history");
+    const history = JSON.parse(localStorage.getItem("loginHistory")) || [];
+
+    historyList.innerHTML = "";
+
+    history.forEach(item => {
+        const li = document.createElement("li");
+
+        li.innerText =
+            item.username + " - " +
+            item.action + " - " +
+            item.time;
+
+        historyList.appendChild(li);
+    });
+}
+
+displayHistory();
